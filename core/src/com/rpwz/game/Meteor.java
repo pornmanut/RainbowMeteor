@@ -2,7 +2,7 @@ package com.rpwz.game;
 
 public class Meteor {
 	
-	private static int numberOfMeteor = 0;
+	private static int NumberOfMeteor = 0;
 	
 	private int x = 0;
 	private int y = 0;
@@ -16,7 +16,7 @@ public class Meteor {
 	}
 	
 	public void addNumberOfMeteor() {
-		numberOfMeteor++;
+		NumberOfMeteor++;
 	}
 	public void setPosition(int x,int y) {
 		this.x = x;
@@ -31,6 +31,6 @@ public class Meteor {
 	}
 	
 	public int getNumberOfMeteor() {
-		return numberOfMeteor;
+		return NumberOfMeteor;
 	}
 }

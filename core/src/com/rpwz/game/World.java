@@ -16,10 +16,11 @@ public class World {
  		this.base = base;
  		
  		addMeteor(new Meteor(100,100));
- 		addMeteor(new Meteor(300,200));
- 		addMeteor(new Meteor(500,300));
+ 		addMeteor(new Meteor(300,200,Meteor.Color.BLUE));
+ 		addMeteor(new Meteor(500,300,Meteor.Color.GREEN));
 
 	}
+	
 	
 	public void setMousePos(int x,int y) {
 		mouseX = x;

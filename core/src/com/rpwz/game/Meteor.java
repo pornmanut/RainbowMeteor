@@ -3,18 +3,33 @@ package com.rpwz.game;
 
 public class Meteor {
 	
+	public static enum Color{
+		RED,
+		GREEN,
+		BLUE,
+		YELLOW,
+		MAGENTA,
+		CYAN,
+		WHITE;
+	}
 	
 	private int x = 0;
 	private int y = 0;
 	private int	xOffset = 24;
 	private int yOffset = 24;
 	private int movementSpeed = 3;
+	private Color color=Color.RED;
+
 	
 	public Meteor() {
 
 	}
 	public Meteor(int x,int y) {
 		setPosition(x,y);
+	}
+	public Meteor(int x,int y,Color color) {
+		setPosition(x, y);
+		this.color = color;
 	}
 	
 	public boolean isCollide(int mouseX,int mouseY) {
@@ -29,10 +44,6 @@ public class Meteor {
 	}
 	
 
-	public void setPosition(int x,int y) {
-		this.x = x;
-		this.y = y;
-	}
 	
 	public void falling() {
 		this.y += movementSpeed;
@@ -45,7 +56,17 @@ public class Meteor {
 	public void update(float delta) {
 		//falling();
 	}
+	public void setPosition(int x,int y) {
+		this.x = x;
+		this.y = y;
+	}
 	
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	public Color getColor() {
+		return color;
+	}
 	public int getMovementSpeed() {
 		return movementSpeed;
 	}

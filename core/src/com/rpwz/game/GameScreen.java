@@ -13,6 +13,9 @@ public class GameScreen extends ScreenAdapter{
 			world = new World(base);
 			worldRenderer = new WorldRenderer(base,world);
 		}
+		private void updateMouse(World world) {
+			world.setMousePos(Gdx.input.getX(),Gdx.input.getY());
+		}
 		
 		private void clear() {
 			Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -20,7 +23,8 @@ public class GameScreen extends ScreenAdapter{
 		}
 		
 		private void update(float delta) {
-			world.update(delta);
+			updateMouse(this.world);
+			this.world.update(delta);
 		}
 		
 		@Override

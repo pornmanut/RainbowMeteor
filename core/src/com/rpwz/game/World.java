@@ -18,6 +18,10 @@ public class World {
  		addMeteor(new Meteor(100,100));
  		addMeteor(new Meteor(300,200,Meteor.Color.BLUE));
  		addMeteor(new Meteor(500,300,Meteor.Color.GREEN));
+ 		addMeteor(new Meteor(100,300,Meteor.Color.CYAN));
+ 		addMeteor(new Meteor(400,200,Meteor.Color.MAGENTA));
+ 		addMeteor(new Meteor(600,250,Meteor.Color.WHITE));
+ 		addMeteor(new Meteor(200,100,Meteor.Color.YELLOW));
 
 	}
 	

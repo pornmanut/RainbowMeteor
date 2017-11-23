@@ -18,6 +18,10 @@ public class WorldRenderer {
 		MeteorImg.put(Meteor.Color.RED,new Texture("redMeteor.png"));
 		MeteorImg.put(Meteor.Color.BLUE,new Texture("blueMeteor.png"));
 		MeteorImg.put(Meteor.Color.GREEN,new Texture("greenMeteor.png"));
+		MeteorImg.put(Meteor.Color.CYAN,new Texture("cyanMeteor.png"));
+		MeteorImg.put(Meteor.Color.YELLOW,new Texture("yellowMeteor.png"));
+		MeteorImg.put(Meteor.Color.MAGENTA,new Texture("magentaMeteor.png"));
+		MeteorImg.put(Meteor.Color.WHITE,new Texture("whiteMeteor.png"));
 	}
 	
 

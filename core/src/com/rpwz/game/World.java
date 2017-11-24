@@ -6,17 +6,16 @@ public class World {
 	private static final int MAX_OF_METEOR = 20;
 	private RainbowMeteor base;
 	private Meteor[] meteorSet =  new Meteor[MAX_OF_METEOR];
-	private Mouse mouse = new Mouse();
+	private WorldInput input;
 	private int meteorIndex = 0;
+	private Color currentColor = MeteorColor.getColorRGB();
 	private int time=0;
-
-	
 	private int score = 0;
 	
-	public World(RainbowMeteor base) {
+	public World(RainbowMeteor base,WorldInput input) {
 
  		this.base = base;
- 		
+ 		this.input = input;
  		addMeteor(new Meteor(100,200));
  		addMeteor(new Meteor(300,200,Color.BLUE));
  		addMeteor(new Meteor(500,200,Color.GREEN));
@@ -33,14 +32,26 @@ public class World {
 		meteorSet[meteorIndex] = meteor;
 		meteorIndex++;
 	}
+
 	
-	public Mouse getMouse() {
-		return mouse;
+	public Color getCurrentColor() {
+		return currentColor;
+	}
+	public void setCurrentColor(Color color) {
+		currentColor = color;
 	}
 	public void setScore(int score) {
+		if(score <= 0) {
+			this.score = 0;
+			return;
+		}
 		this.score = score;
 	}
 	public void addScore(int add) {
+		if(this.score+add <= 0) {
+			this.score = 0;
+			return;
+		}
 		this.score += add;
 	}
 	public int getScore() {
@@ -59,6 +70,15 @@ public class World {
 	public Meteor getMeteor(int index){
 		return meteorSet[index];
 	}
+
+	public void updateColor(float delta) {
+		if(input.isKeyQ()) MeteorColor.setR(true);
+		if(input.isKeyW()) MeteorColor.setG(true);
+		if(input.isKeyE()) MeteorColor.setB(true);
+		if(input.isKeySpaceBar()) MeteorColor.clearColor();
+		
+		currentColor = MeteorColor.getColorRGB();
+	}
 	public void updateTime(float delta) {
 		time += delta;
 	}
@@ -67,7 +87,7 @@ public class World {
 			if(meteorSet[i] == null)break;
 			Meteor m = meteorSet[i];
 			m.update(delta);
-			if(m.isCollide(mouse.getX(), mouse.getY()) && mouse.getLeftPressed()) {
+			if(m.isCollide(input.getX(), input.getY()) && input.isLeftPressed() && m.isColor(currentColor)) {
 				m.falling();
 			}
 			if(m.isOutOfEdge(base.HEIGHT)) {
@@ -77,6 +97,7 @@ public class World {
 	}
 	
 	public void update(float delta) {
+		updateColor(delta);
 		updateTime(delta);
 		updateMeteor(delta);
 	}

@@ -9,14 +9,22 @@ public class GameScreen extends ScreenAdapter{
 	
 		private World world;
 		private WorldRenderer worldRenderer;
+		private WorldInput input;
 
 		public GameScreen(RainbowMeteor base) {
-			world = new World(base);
-			worldRenderer = new WorldRenderer(base,world);
+			input = new WorldInput();
+			world = new World(base,input);
+			worldRenderer = new WorldRenderer(base,world,input);
+		}
+		private void updateKeys(World world) {
+			input.setKeyQ(Gdx.input.isKeyPressed(Input.Keys.Q));
+			input.setKeyW(Gdx.input.isKeyPressed(Input.Keys.W));
+			input.setKeyE(Gdx.input.isKeyPressed(Input.Keys.E));
+			input.setKeySpaceBar(Gdx.input.isKeyPressed(Input.Keys.SPACE));
 		}
 		private void updateMouse(World world) {
-			world.getMouse().setPos(Gdx.input.getX(),Gdx.input.getY());
-			world.getMouse().setLeftPressed(Gdx.input.isButtonPressed(Input.Buttons.LEFT));
+			input.setPos(Gdx.input.getX(),Gdx.input.getY());
+			input.setLeftPressed(Gdx.input.isButtonPressed(Input.Buttons.LEFT));
 		}
 		
 		private void clear() {
@@ -25,8 +33,9 @@ public class GameScreen extends ScreenAdapter{
 		}
 		
 		private void update(float delta) {
-			updateMouse(this.world);
-			this.world.update(delta);
+			updateMouse(world);
+			updateKeys(world);
+			world.update(delta);
 		}
 		
 		@Override

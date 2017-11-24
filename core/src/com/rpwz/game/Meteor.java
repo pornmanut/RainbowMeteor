@@ -11,7 +11,7 @@ public class Meteor {
 	private int y = 0;
 	private int	xOffset = 24;
 	private int yOffset = 24;
-	private int movementSpeed = 2;
+	private int movementSpeed = 4;
 	private Color color = Color.RED;
 
 	
@@ -24,6 +24,9 @@ public class Meteor {
 	public Meteor(int x,int y,Color color) {
 		setPosition(x, y);
 		this.color = color;
+	}
+	public boolean isColor(Color color) {
+		return (this.color == color);
 	}
 	
 	public boolean isCollide(int mouseX,int mouseY) {

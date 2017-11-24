@@ -1,7 +1,7 @@
 package com.rpwz.game;
 
 
-import com.badlogic.gdx.graphics.Texture;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -12,19 +12,21 @@ public class WorldRenderer {
 	private SpriteBatch batch;
 	private RainbowMeteor base;
 	private BitmapFont font;
+	private WorldInput input;
 
 	
-	public WorldRenderer(RainbowMeteor base,World world) {
+	public WorldRenderer(RainbowMeteor base,World world,WorldInput input) {
 		this.world = world;
 		this.batch = base.batch;
 		this.font = base.font;
 		this.base = base;
+		this.input = input;
 		
 	}
 	public int getPosY(int y) {
 		return base.HEIGHT-y;
 	}
-	public void drawTotalMeteor() {
+	public void drawTotalMeteor(SpriteBatch batch) {
 		for(int i=0;i<world.getMaxOfMeteor();i++) {
 			if(world.getMeteor(i) == null)break;
 			Meteor m = world.getMeteor(i);
@@ -32,19 +34,33 @@ public class WorldRenderer {
 					m.getPosX()-m.getXOffset(),
 					getPosY(m.getPosY())-m.getYOffset());
 			
+
+		}
+	}
+	
+	public void showDebug(SpriteBatch batch) {
+		font.draw(batch,"mouseX: "+input.getX(),100,getPosY(500));
+		font.draw(batch,"mouseY: "+input.getY(),100,getPosY(520));
+		font.draw(batch,"Total Meteor: "+world.getMeteorIndex()+"/"+world.getMaxOfMeteor(),200,getPosY(500));
+		font.draw(batch,"Color: "+world.getCurrentColor(),200,getPosY(520));
+		font.draw(batch,"Q: "+input.isKeyQ(),400,getPosY(500));
+		font.draw(batch,"W: "+input.isKeyW(),400,getPosY(520));
+		font.draw(batch,"E: "+input.isKeyE(),400,getPosY(540));
+		font.draw(batch,"SpaceBar: "+input.isKeySpaceBar(),400,getPosY(560));
+		font.draw(batch,"Score: "+world.getScore(),500,getPosY(500));
+		
+		for(int i=0;i<world.getMaxOfMeteor();i++) {
+			if(world.getMeteor(i) == null)break;
+			Meteor m = world.getMeteor(i);
 			font.draw(batch,"x: "+m.getPosX()+"\ny: "+m.getPosY()+"\nc: "+m.getColor(),
 					m.getPosX()+5+m.getXOffset(),
 					getPosY(m.getPosY()));
 		}
 	}
-	
 	public void render(float delta) {
 		batch.begin();
-		font.draw(batch,"Total Meteor: "+world.getMeteorIndex(),300,getPosY(500));
-		font.draw(batch,"mouseX: "+world.getMouse().getX(),100,getPosY(500));
-		font.draw(batch,"mouseY: "+world.getMouse().getY(),100,getPosY(520));
-		font.draw(batch,"Time: "+world.getTime(),200,getPosY(500));
-		drawTotalMeteor();
+		drawTotalMeteor(batch);
+		showDebug(batch);
 		batch.end();
 		
 	}

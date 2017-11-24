@@ -1,24 +1,18 @@
 package com.rpwz.game;
 
 
+
+import com.rpwz.game.MeteorColor.Color;
 public class Meteor {
 	
-	public static enum Color{
-		RED,
-		GREEN,
-		BLUE,
-		YELLOW,
-		MAGENTA,
-		CYAN,
-		WHITE;
-	}
+	
 	
 	private int x = 0;
 	private int y = 0;
 	private int	xOffset = 24;
 	private int yOffset = 24;
-	private int movementSpeed = 3;
-	private Color color=Color.RED;
+	private int movementSpeed = 2;
+	private Color color = Color.RED;
 
 	
 	public Meteor() {

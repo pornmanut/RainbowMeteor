@@ -1,6 +1,6 @@
 package com.rpwz.game;
 
-
+import com.rpwz.game.MeteorColor.Color;
 public class World {
 	
 	private static final int MAX_OF_METEOR = 20;
@@ -18,12 +18,12 @@ public class World {
  		this.base = base;
  		
  		addMeteor(new Meteor(100,200));
- 		addMeteor(new Meteor(300,200,Meteor.Color.BLUE));
- 		addMeteor(new Meteor(500,200,Meteor.Color.GREEN));
- 		addMeteor(new Meteor(700,200,Meteor.Color.CYAN));
- 		addMeteor(new Meteor(400,200,Meteor.Color.MAGENTA));
- 		addMeteor(new Meteor(600,200,Meteor.Color.WHITE));
- 		addMeteor(new Meteor(200,200,Meteor.Color.YELLOW));
+ 		addMeteor(new Meteor(300,200,Color.BLUE));
+ 		addMeteor(new Meteor(500,200,Color.GREEN));
+ 		addMeteor(new Meteor(700,200,Color.CYAN));
+ 		addMeteor(new Meteor(400,200,Color.MAGENTA));
+ 		addMeteor(new Meteor(600,200,Color.WHITE));
+ 		addMeteor(new Meteor(200,200,Color.YELLOW));
 
 	}
 	

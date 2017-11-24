@@ -1,9 +1,6 @@
 package com.rpwz.game;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,20 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class WorldRenderer {
 	
-	public static final Map<Meteor.Color,Texture> MeteorImg;
-	static {
-		MeteorImg = new HashMap<Meteor.Color,Texture>();
-		
-		MeteorImg.put(Meteor.Color.RED,new Texture("redMeteor.png"));
-		MeteorImg.put(Meteor.Color.BLUE,new Texture("blueMeteor.png"));
-		MeteorImg.put(Meteor.Color.GREEN,new Texture("greenMeteor.png"));
-		MeteorImg.put(Meteor.Color.CYAN,new Texture("cyanMeteor.png"));
-		MeteorImg.put(Meteor.Color.YELLOW,new Texture("yellowMeteor.png"));
-		MeteorImg.put(Meteor.Color.MAGENTA,new Texture("magentaMeteor.png"));
-		MeteorImg.put(Meteor.Color.WHITE,new Texture("whiteMeteor.png"));
-	}
-	
-
 	private World world;
 	private SpriteBatch batch;
 	private RainbowMeteor base;
@@ -45,7 +28,7 @@ public class WorldRenderer {
 		for(int i=0;i<world.getMaxOfMeteor();i++) {
 			if(world.getMeteor(i) == null)break;
 			Meteor m = world.getMeteor(i);
-			batch.draw(MeteorImg.get(m.getColor()),
+			batch.draw(MeteorColor.getMeteorTexture(m.getColor()),
 					m.getPosX()-m.getXOffset(),
 					getPosY(m.getPosY())-m.getYOffset());
 			

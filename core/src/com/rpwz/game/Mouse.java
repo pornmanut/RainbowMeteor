@@ -4,6 +4,7 @@ public class Mouse {
 	private int mouseX = 0;
 	private int mouseY = 0;
 	private boolean mouseLeftPressed = false;
+
 	
 	public Mouse() {
 		

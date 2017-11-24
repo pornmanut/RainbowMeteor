@@ -27,14 +27,14 @@ public class WorldRenderer {
 
 	private World world;
 	private SpriteBatch batch;
-	private BitmapFont font;
 	private RainbowMeteor base;
+	private BitmapFont font;
 
 	
 	public WorldRenderer(RainbowMeteor base,World world) {
 		this.world = world;
 		this.batch = base.batch;
-		this.font = new BitmapFont();
+		this.font = base.font;
 		this.base = base;
 		
 	}

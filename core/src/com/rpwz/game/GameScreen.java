@@ -1,6 +1,7 @@
 package com.rpwz.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 
@@ -15,6 +16,7 @@ public class GameScreen extends ScreenAdapter{
 		}
 		private void updateMouse(World world) {
 			world.setMousePos(Gdx.input.getX(),Gdx.input.getY());
+			world.setMouseLeftPressed(Gdx.input.isButtonPressed(Input.Buttons.LEFT));
 		}
 		
 		private void clear() {

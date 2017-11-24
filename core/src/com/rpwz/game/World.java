@@ -10,21 +10,28 @@ public class World {
 	private int time=0;
 	private int mouseX = 0;
 	private int mouseY = 0;
+	private boolean mouseLeftPressed = false;
 	
 	public World(RainbowMeteor base) {
 
  		this.base = base;
  		
- 		addMeteor(new Meteor(100,100));
+ 		addMeteor(new Meteor(100,200));
  		addMeteor(new Meteor(300,200,Meteor.Color.BLUE));
- 		addMeteor(new Meteor(500,300,Meteor.Color.GREEN));
- 		addMeteor(new Meteor(100,300,Meteor.Color.CYAN));
+ 		addMeteor(new Meteor(500,200,Meteor.Color.GREEN));
+ 		addMeteor(new Meteor(700,200,Meteor.Color.CYAN));
  		addMeteor(new Meteor(400,200,Meteor.Color.MAGENTA));
- 		addMeteor(new Meteor(600,250,Meteor.Color.WHITE));
- 		addMeteor(new Meteor(200,100,Meteor.Color.YELLOW));
+ 		addMeteor(new Meteor(600,200,Meteor.Color.WHITE));
+ 		addMeteor(new Meteor(200,200,Meteor.Color.YELLOW));
 
 	}
 	
+	public void setMouseLeftPressed(boolean leftPressed) {
+		mouseLeftPressed = leftPressed;
+	}
+	public boolean getMouseLeftPressed() {
+		return mouseLeftPressed;
+	}
 	
 	public void setMousePos(int x,int y) {
 		mouseX = x;
@@ -64,7 +71,7 @@ public class World {
 			if(meteorSet[i] == null)break;
 			Meteor m = meteorSet[i];
 			m.update(delta);
-			if(m.isCollide(mouseX, mouseY)) {
+			if(m.isCollide(mouseX, mouseY) && mouseLeftPressed) {
 				m.falling();
 			}
 			if(m.isOutOfEdge(base.HEIGHT)) {

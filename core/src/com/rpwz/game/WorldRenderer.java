@@ -58,8 +58,9 @@ public class WorldRenderer {
 	public void render(float delta) {
 		batch.begin();
 		font.draw(batch,"Total Meteor: "+world.getMeteorIndex(),300,getPosY(500));
-		font.draw(batch,"mouseX: "+world.getMouseX(),100,getPosY(500));
-		font.draw(batch,"mouseY: "+world.getMouseY(),100,getPosY(520));
+		font.draw(batch,"mouseX: "+world.getMouse().getX(),100,getPosY(500));
+		font.draw(batch,"mouseY: "+world.getMouse().getY(),100,getPosY(520));
+		font.draw(batch,"Time: "+world.getTime(),200,getPosY(500));
 		drawTotalMeteor();
 		batch.end();
 		

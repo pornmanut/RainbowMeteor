@@ -15,8 +15,8 @@ public class GameScreen extends ScreenAdapter{
 			worldRenderer = new WorldRenderer(base,world);
 		}
 		private void updateMouse(World world) {
-			world.setMousePos(Gdx.input.getX(),Gdx.input.getY());
-			world.setMouseLeftPressed(Gdx.input.isButtonPressed(Input.Buttons.LEFT));
+			world.getMouse().setPos(Gdx.input.getX(),Gdx.input.getY());
+			world.getMouse().setLeftPressed(Gdx.input.isButtonPressed(Input.Buttons.LEFT));
 		}
 		
 		private void clear() {

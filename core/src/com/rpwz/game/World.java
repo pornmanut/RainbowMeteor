@@ -3,14 +3,15 @@ package com.rpwz.game;
 
 public class World {
 	
-	private static final int MAX_OF_METEOR = 10;
+	private static final int MAX_OF_METEOR = 20;
 	private RainbowMeteor base;
 	private Meteor[] meteorSet =  new Meteor[MAX_OF_METEOR];
+	private Mouse mouse = new Mouse();
 	private int meteorIndex = 0;
 	private int time=0;
-	private int mouseX = 0;
-	private int mouseY = 0;
-	private boolean mouseLeftPressed = false;
+
+	
+	private int score = 0;
 	
 	public World(RainbowMeteor base) {
 
@@ -26,30 +27,25 @@ public class World {
 
 	}
 	
-	public void setMouseLeftPressed(boolean leftPressed) {
-		mouseLeftPressed = leftPressed;
-	}
-	public boolean getMouseLeftPressed() {
-		return mouseLeftPressed;
-	}
 	
-	public void setMousePos(int x,int y) {
-		mouseX = x;
-		mouseY = y;
-	}
-	
-	public int getMouseX() {
-		return mouseX;
-	}
-	public int getMouseY() {
-		return mouseY;
-	}
 	public void addMeteor(Meteor meteor) {
 		if(meteorIndex == MAX_OF_METEOR-1) return;
 		meteorSet[meteorIndex] = meteor;
 		meteorIndex++;
 	}
 	
+	public Mouse getMouse() {
+		return mouse;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public void addScore(int add) {
+		this.score += add;
+	}
+	public int getScore() {
+		return score;
+	}
 	public int getTime() {
 		return time;
 	}
@@ -71,7 +67,7 @@ public class World {
 			if(meteorSet[i] == null)break;
 			Meteor m = meteorSet[i];
 			m.update(delta);
-			if(m.isCollide(mouseX, mouseY) && mouseLeftPressed) {
+			if(m.isCollide(mouse.getX(), mouse.getY()) && mouse.getLeftPressed()) {
 				m.falling();
 			}
 			if(m.isOutOfEdge(base.HEIGHT)) {

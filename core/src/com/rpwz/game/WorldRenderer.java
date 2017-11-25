@@ -24,7 +24,7 @@ public class WorldRenderer {
 		
 	}
 	public int getPosY(int y) {
-		return base.HEIGHT-y;
+		return base.getHeight()-y;
 	}
 	public void drawTotalMeteor(SpriteBatch batch) {
 		for(int i=0;i<world.getMaxOfMeteor();i++) {
@@ -48,11 +48,13 @@ public class WorldRenderer {
 		font.draw(batch,"E: "+input.isKeyE(),400,getPosY(540));
 		font.draw(batch,"SpaceBar: "+input.isKeySpaceBar(),400,getPosY(560));
 		font.draw(batch,"Score: "+world.getScore(),500,getPosY(500));
+		font.draw(batch,"HP: "+world.getHP(),500,getPosY(520));
+		font.draw(batch,"Time: "+String.format("%.2f",world.getTime()),500,getPosY(540));
 		
 		for(int i=0;i<world.getMaxOfMeteor();i++) {
 			if(world.getMeteor(i) == null)break;
 			Meteor m = world.getMeteor(i);
-			font.draw(batch,"x: "+m.getPosX()+"\ny: "+m.getPosY()+"\nc: "+m.getColor(),
+			font.draw(batch,"index: "+i+"\nx: "+m.getPosX()+"\ny: "+m.getPosY()+"\nc: "+m.getColor(),
 					m.getPosX()+5+m.getXOffset(),
 					getPosY(m.getPosY()));
 		}

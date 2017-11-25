@@ -10,8 +10,8 @@ public class RainbowMeteor extends Game {
 	public SpriteBatch batch;
 	public BitmapFont font;
 	
-	public static final int HEIGHT = 600;
-	public static final int WIDTH = 800;
+	private static final int HEIGHT = 600;
+	private static final int WIDTH = 800;
 	
 	@Override
 	public void create () {
@@ -29,5 +29,13 @@ public class RainbowMeteor extends Game {
 	public void dispose () {
 		font.dispose();
 		batch.dispose();
+	}
+
+	public static int getHeight() {
+		return HEIGHT;
+	}
+
+	public static int getWidth() {
+		return WIDTH;
 	}
 }

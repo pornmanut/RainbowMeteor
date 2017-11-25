@@ -3,29 +3,35 @@ package com.rpwz.game;
 import com.rpwz.game.MeteorColor.Color;
 public class World {
 	
-	private static final int MAX_OF_METEOR = 20;
+	private static final int MARGIN_EDGE = 80;
+	private static final int MAX_OF_METEOR = 30;
 	private RainbowMeteor base;
 	private Meteor[] meteorSet =  new Meteor[MAX_OF_METEOR];
 	private WorldInput input;
 	private int meteorIndex = 0;
 	private Color currentColor = MeteorColor.getColorRGB();
-	private int time=0;
+	private float time=0;
 	private int score = 0;
+	private int hp=10;
+	
 	
 	public World(RainbowMeteor base,WorldInput input) {
 
  		this.base = base;
  		this.input = input;
- 		addMeteor(new Meteor(100,200));
- 		addMeteor(new Meteor(300,200,Color.BLUE));
- 		addMeteor(new Meteor(500,200,Color.GREEN));
- 		addMeteor(new Meteor(700,200,Color.CYAN));
- 		addMeteor(new Meteor(400,200,Color.MAGENTA));
- 		addMeteor(new Meteor(600,200,Color.WHITE));
- 		addMeteor(new Meteor(200,200,Color.YELLOW));
+ 		//createSetOfMeteor(0,7);
+ 		createSetOfMeteor(50,7);
+ 		//createSetOfMeteor(100,7);
+ 		
 
 	}
-	
+	public void createSetOfMeteor(int startY,int value) {
+		int size = (base.getWidth()-MARGIN_EDGE)/value;
+		for(int i=0;i<value;i++) {
+			Meteor m = new Meteor(MARGIN_EDGE+size*i,startY,Color.RED);
+			addMeteor(m);
+		}
+	}
 	
 	public void addMeteor(Meteor meteor) {
 		if(meteorIndex == MAX_OF_METEOR-1) return;
@@ -33,7 +39,23 @@ public class World {
 		meteorIndex++;
 	}
 
-	
+	public int getHP() {
+		return hp;
+	}
+	public void setHP(int hp) {
+		if(hp < 0) {
+			this.hp =0;
+			return;
+		}
+		this.hp = hp;
+	}
+	public void removeHP(int hp) {
+		if(this.hp-hp < 0) {
+			this.hp = 0;
+			return;
+		}
+		this.hp -= hp;
+	}
 	public Color getCurrentColor() {
 		return currentColor;
 	}
@@ -47,6 +69,7 @@ public class World {
 		}
 		this.score = score;
 	}
+	
 	public void addScore(int add) {
 		if(this.score+add <= 0) {
 			this.score = 0;
@@ -57,11 +80,14 @@ public class World {
 	public int getScore() {
 		return score;
 	}
-	public int getTime() {
+	public float getTime() {
 		return time;
 	}
 	public int getMeteorIndex() {
 		return meteorIndex;
+	}
+	public void	fallMeteor(int index) {
+		meteorSet[index].setRuning(true);
 	}
 	
 	public int getMaxOfMeteor() {
@@ -88,10 +114,13 @@ public class World {
 			Meteor m = meteorSet[i];
 			m.update(delta);
 			if(m.isCollide(input.getX(), input.getY()) && input.isLeftPressed() && m.isColor(currentColor)) {
-				m.falling();
+				m.returnToStartPosition();
+				fallMeteor(i);
 			}
-			if(m.isOutOfEdge(base.HEIGHT)) {
-				m.setPosition(m.getPosX(),100);
+			if(m.isOutOfEdge(base.getHeight())) {
+				m.returnToStartPosition();
+				m.setRuning(false);
+				removeHP(1);
 			}
 		}
 	}
@@ -100,6 +129,9 @@ public class World {
 		updateColor(delta);
 		updateTime(delta);
 		updateMeteor(delta);
+	}
+	public static int getMarginEdge() {
+		return MARGIN_EDGE;
 	}
 	
 	

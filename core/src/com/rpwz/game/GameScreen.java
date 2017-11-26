@@ -13,7 +13,7 @@ public class GameScreen extends ScreenAdapter{
 
 		public GameScreen(RainbowMeteor base) {
 			input = new WorldInput();
-			world = new World(base,input);
+			world = new World(input);
 			worldRenderer = new WorldRenderer(base,world,input);
 		}
 		private void updateKeys(World world) {

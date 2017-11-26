@@ -15,7 +15,7 @@ public class Meteor {
 	private int yOffset = 24;
 	private int movementSpeed = 3;
 	private Color color = Color.RED;
-	private boolean runing = false;
+	private boolean move = false;
 
 	
 	public Meteor() {
@@ -56,7 +56,7 @@ public class Meteor {
 	}
 	
 	public void update(float delta) {
-		if(this.runing) {
+		if(this.move) {
 			falling();
 		}
 	}
@@ -107,10 +107,10 @@ public class Meteor {
 	public void setStattY(int stattY) {
 		this.stattY = stattY;
 	}
-	public boolean isRuning() {
-		return runing;
+	public boolean isMove() {
+		return move;
 	}
-	public void setRuning(boolean bool) {
-		this.runing = bool;
+	public void setMove(boolean bool) {
+		this.move = bool;
 	}
 }

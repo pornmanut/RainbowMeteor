@@ -10,7 +10,6 @@ public class WorldRenderer {
 	
 	private World world;
 	private SpriteBatch batch;
-	private RainbowMeteor base;
 	private BitmapFont font;
 	private WorldInput input;
 
@@ -19,17 +18,15 @@ public class WorldRenderer {
 		this.world = world;
 		this.batch = base.batch;
 		this.font = base.font;
-		this.base = base;
 		this.input = input;
 		
 	}
 	public int getPosY(int y) {
-		return base.getHeight()-y;
+		return RainbowMeteor.getHeight()-y;
 	}
 	public void drawTotalMeteor(SpriteBatch batch) {
-		for(int i=0;i<world.getMaxOfMeteor();i++) {
-			if(world.getMeteor(i) == null)break;
-			Meteor m = world.getMeteor(i);
+		for(int i=0;i<world.getMeteorSystem().getMaxOfMeteor();i++) {
+			Meteor m = world.getMeteorSystem().getMeteor(i);
 			batch.draw(MeteorColor.getMeteorTexture(m.getColor()),
 					m.getPosX()-m.getXOffset(),
 					getPosY(m.getPosY())-m.getYOffset());
@@ -41,7 +38,6 @@ public class WorldRenderer {
 	public void showDebug(SpriteBatch batch) {
 		font.draw(batch,"mouseX: "+input.getX(),100,getPosY(500));
 		font.draw(batch,"mouseY: "+input.getY(),100,getPosY(520));
-		font.draw(batch,"Total Meteor: "+world.getMeteorIndex()+"/"+world.getMaxOfMeteor(),200,getPosY(500));
 		font.draw(batch,"Color: "+world.getCurrentColor(),200,getPosY(520));
 		font.draw(batch,"Q: "+input.isKeyQ(),400,getPosY(500));
 		font.draw(batch,"W: "+input.isKeyW(),400,getPosY(520));
@@ -51,9 +47,8 @@ public class WorldRenderer {
 		font.draw(batch,"HP: "+world.getHP(),500,getPosY(520));
 		font.draw(batch,"Time: "+String.format("%.2f",world.getTime()),500,getPosY(540));
 		
-		for(int i=0;i<world.getMaxOfMeteor();i++) {
-			if(world.getMeteor(i) == null)break;
-			Meteor m = world.getMeteor(i);
+		for(int i=0;i<world.getMeteorSystem().getMaxOfMeteor();i++) {
+			Meteor m = world.getMeteorSystem().getMeteor(i);
 			font.draw(batch,"index: "+i+"\nx: "+m.getPosX()+"\ny: "+m.getPosY()+"\nc: "+m.getColor(),
 					m.getPosX()+5+m.getXOffset(),
 					getPosY(m.getPosY()));

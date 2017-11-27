@@ -2,17 +2,20 @@ package com.rpwz.game;
 
 import com.rpwz.game.MeteorColor.Color;
 public class SpawnMeteorInfo {
-	private int index;
+	private int row;
+	private int col;
 	private Color color;
 	private float timeStart;
 	private float time;
 	private boolean spawn;
+	private boolean alreadySpawn = false;
 	
-	public SpawnMeteorInfo(int index,Color color,int timeStart) {
-		setUp(index, color, timeStart);
+	public SpawnMeteorInfo(int row,int col,Color color,float timeStart) {
+		setup(row,col, color, timeStart);
 	}
-	public void setUp(int index,Color color,int timeStart) {
-		this.index = index;
+	public void setup(int row,int col,Color color,float timeStart) {
+		this.row = row;
+		this.col = col;
 		this.color = color;
 		this.timeStart = timeStart;
 		this.time = timeStart;
@@ -20,15 +23,30 @@ public class SpawnMeteorInfo {
 	}
 	
 	public void update(float delta) {
+		if(alreadySpawn) {
+			spawn = false;
+			return;
+		}
 		if(time <= 0) {
+			alreadySpawn = true;
 			spawn = true;
 			return;
 		}
 		time -= delta;
 	}
 	
-	public int getIndex() {
-		return index;
+	public boolean getAlreadySpawn() {
+		return alreadySpawn;
+	}
+	public void reset() {
+		this.time = timeStart;
+		this.alreadySpawn = false;
+	}
+	public int getRow() {
+		return row;
+	}
+	public int getCol() {
+		return col;
 	}
 	
 	public boolean isSpawn() {

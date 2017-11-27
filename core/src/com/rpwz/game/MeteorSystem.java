@@ -8,8 +8,8 @@ public class MeteorSystem {
 	private final int COL_OF_METEOR = 8;
 	private final int MAX_OF_METEOR = ROW_OF_METEOR*COL_OF_METEOR;
 	
-	private final int START_Y = 100;
-	private final int MARGIN_Y = 50;
+	private final int START_Y = -80;
+	private final int MARGIN_Y = 0;
 	
 	private final int MARGIN_EDGE = 80;
 	
@@ -45,6 +45,12 @@ public class MeteorSystem {
 		setMeteorMove(index, bool);
 	}
 	
+	public int getRowOfMeteor() {
+		return ROW_OF_METEOR;
+	}
+	public int getColOfMeteor() {
+		return COL_OF_METEOR;
+	}
 	public int getMaxOfMeteor() {
 		return MAX_OF_METEOR;
 	}

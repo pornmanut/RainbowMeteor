@@ -11,6 +11,17 @@ public class World {
 	private int score = 0;
 	private int hp=10;
 	private MeteorSystem ms;
+	private MeteorLevel level ;
+	private SpawnMeteorInfo[] miLevel01 = {new SpawnMeteorInfo(2, 1,Color.GREEN,2),new SpawnMeteorInfo(0, 7,Color.GREEN,4),
+			 								new SpawnMeteorInfo(1, 1,Color.BLUE,6),new SpawnMeteorInfo(1, 5, Color.RED,8),
+			 								new SpawnMeteorInfo(0, 5,Color.RED,10),new SpawnMeteorInfo(2,3,Color.BLUE,7),
+			 								new SpawnMeteorInfo(0,6,Color.BLUE,10), new SpawnMeteorInfo(0, 4,Color.RED,11),
+			 								new SpawnMeteorInfo(1, 3,Color.RED,12), new SpawnMeteorInfo(2, 5,Color.GREEN,11),
+			 								new SpawnMeteorInfo(2,7,Color.BLUE,11), new SpawnMeteorInfo(2,0,Color.GREEN,15),
+			 								new SpawnMeteorInfo(0,3,Color.BLUE,17), new SpawnMeteorInfo(0,0, Color.RED,17),
+			 								new SpawnMeteorInfo(2, 1, Color.BLUE,19), new SpawnMeteorInfo(2,0,Color.GREEN,20)};
+	
+
 	
 	public World(WorldInput input) {
 
@@ -20,7 +31,7 @@ public class World {
 	}
 	public void init() {
 		this.ms = new MeteorSystem();
-		this.ms.setMeteor(0,7,Color.BLUE, true);
+		this.level = new MeteorLevel(ms,miLevel01);
 	}
 	
 	public MeteorSystem getMeteorSystem() {
@@ -92,6 +103,8 @@ public class World {
 			m.update(delta);
 			if(m.isCollide(input.getX(), input.getY()) && input.isLeftPressed() && m.isColor(currentColor)) {
 				m.returnToStartPosition();
+				m.setMove(false);
+				addScore(10);
 			}
 			if(m.isOutOfEdge(RainbowMeteor.getHeight())) {
 				m.returnToStartPosition();
@@ -105,6 +118,7 @@ public class World {
 		updateColor(delta);
 		updateTime(delta);
 		updateMeteor(delta);
+		level.update(delta);
 	}
 
 

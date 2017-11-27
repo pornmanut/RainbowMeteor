@@ -13,6 +13,7 @@ public class Meteor {
 	private int stattY = y;
 	private int	xOffset = 24;
 	private int yOffset = 24;
+	private int movementHoriznotal = 1;
 	private int movementSpeed = 3;
 	private Color color = Color.RED;
 	private boolean move = false;
@@ -45,10 +46,24 @@ public class Meteor {
 		return false;
 	}
 	
-
+	public void horizontal() {
+		this.x += movementHoriznotal;
+	}
+	public void setHorizontal(int movement) {
+		this.movementHoriznotal = movement;
+	}
+	public int getHorizontal() {
+		return this.movementHoriznotal;
+	}
 	
 	public void falling() {
 		this.y += movementSpeed;
+	}
+	public boolean isOutOfSide() {
+		if(this.x-yOffset < 0 || this.x+xOffset > RainbowMeteor.getWidth()){
+			return true;
+		}
+		return false;
 	}
 	public boolean isOutOfEdge(int height) {
 		if(this.y > height+yOffset/2)return true;
@@ -58,7 +73,12 @@ public class Meteor {
 	public void update(float delta) {
 		if(this.move) {
 			falling();
+			if(isOutOfSide()) {
+				setHorizontal(getHorizontal()*-1);
+			}
+			horizontal();
 		}
+	
 	}
 	public void setPosition(int x,int y) {
 		this.x = x;

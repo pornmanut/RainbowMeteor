@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.rpwz.game.MeteorColor.Color;
 
 public class MeteorColor {
 	

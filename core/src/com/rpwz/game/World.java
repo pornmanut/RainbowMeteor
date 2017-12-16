@@ -3,13 +3,15 @@ package com.rpwz.game;
 import com.rpwz.game.MeteorColor.Color;
 public class World {
 	
-
-
+	private static final int MAX_DELAY_LEVEL_TIME = 2;
+	
 	private WorldInput input;
 	private Color currentColor = MeteorColor.GetColorRGB();
 	private float time=0;
 	private int score = 0;
 	private int hp=10;
+	private float delayLevelTime = 0;
+
 	private MeteorSystem ms;
 	private MeteorLevel ml ;
 	
@@ -17,7 +19,7 @@ public class World {
 
  		this.input = input;
  		this.ms = new MeteorSystem();
- 		this.ml = new MeteorLevel(ms,"level/test.txt");
+ 		this.ml = new MeteorLevel(ms,0);
  
 	}
 	
@@ -70,6 +72,9 @@ public class World {
 	public float getTime() {
 		return time;
 	}
+	public MeteorLevel getMeteorLevel() {
+		return ml;
+	}
 
 
 
@@ -86,12 +91,24 @@ public class World {
 	public void updateTime(float delta) {
 		time += delta;
 	}
+	public void updateLevel(float delta) {
+		if(ml.isFinishLevel()) {
+			if(delayLevelTime <  MAX_DELAY_LEVEL_TIME) {
+				delayLevelTime += delta;
+				return ;
+			}
+			
+			if(!ml.isLastLevel() ) ml.changeLevelTo(ml.getLevel()+1);
+			delayLevelTime = 0;
+		}
+		ml.update(delta);
+	}
 	
 	public void updateMeteor(float delta) {
 		for(int i=0;i<ms.getMaxOfMeteor();i++) {
 			Meteor m = ms.getMeteor(i);
 			m.update(delta);
-			if(m.isCollide(input.getX(), input.getY()) && input.isLeftPressed() && m.isColor(currentColor)) {
+			if(m.isCollide(input.getX(), input.getY()) && input.isClicked() && m.isColor(currentColor)) {
 				m.decreaseHP(1);
 				if(!m.getAlive()) {
 					m.reset();
@@ -109,7 +126,7 @@ public class World {
 		updateColor(delta);
 		updateTime(delta);
 		updateMeteor(delta);
-		ml.update(delta);
+		updateLevel(delta);
 	}
 
 

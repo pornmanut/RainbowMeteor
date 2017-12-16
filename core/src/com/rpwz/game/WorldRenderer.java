@@ -6,8 +6,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
+
 public class WorldRenderer {
-	
+
 	private World world;
 	private SpriteBatch batch;
 	private BitmapFont font;
@@ -42,6 +43,7 @@ public class WorldRenderer {
 		font.draw(batch,"Q: "+input.isKeyQ(),400,getPosY(500));
 		font.draw(batch,"W: "+input.isKeyW(),400,getPosY(520));
 		font.draw(batch,"E: "+input.isKeyE(),400,getPosY(540));
+		font.draw(batch,"Level: "+world.getMeteorLevel().getLevel(),400,getPosY(560));
 		font.draw(batch,"Score: "+world.getScore(),500,getPosY(500));
 		font.draw(batch,"HP: "+world.getHP(),500,getPosY(520));
 		font.draw(batch,"Time: "+String.format("%.2f",world.getTime()),500,getPosY(540));

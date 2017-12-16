@@ -7,6 +7,7 @@ public class WorldInput {
 	private boolean keyW;
 	private boolean keyE;
 	private boolean keySpaceBar;
+	private boolean alreadyClicked = false;
 	private boolean mouseLeftPressed = false;
 	
 	public WorldInput() {
@@ -19,7 +20,15 @@ public class WorldInput {
 	public boolean isLeftPressed() {
 		return mouseLeftPressed;
 	}
-	
+	public boolean isClicked() {
+		if(!mouseLeftPressed) alreadyClicked = false;
+		
+		if((!alreadyClicked) && mouseLeftPressed) {
+			alreadyClicked = true;
+			return true;
+		}
+		return false;
+	}
 	public void setPos(int x,int y) {
 		mouseX = x;
 		mouseY = y;

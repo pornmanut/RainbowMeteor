@@ -15,7 +15,7 @@ public class Meteor {
 	private int	xOffset = 16;
 	private int yOffset = 16;
 	private int movementHoriznotal = 1;
-	private int movementSpeed = 3;
+	private int movementSpeed = 2;
 	private Color color = Color.RED;
 	private boolean move = false;
 

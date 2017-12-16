@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.rpwz.game.MeteorColor.Color;
 
 public class MeteorColor {
 	
@@ -52,6 +53,18 @@ public class MeteorColor {
 		MeteorTexture.put(Color.YELLOW,new Texture("images/yellowMeteor.png"));
 		MeteorTexture.put(Color.MAGENTA,new Texture("images/magentaMeteor.png"));
 		MeteorTexture.put(Color.WHITE,new Texture("images/whiteMeteor.png"));
+	}
+	public static Color charToColor(char c) {
+		switch(c) {
+		case'R': 	return Color.RED;
+		case'G':	return Color.GREEN;
+		case'B':	return Color.BLUE;
+		case'M':	return Color.MAGENTA;
+		case'C':	return Color.CYAN;
+		case'Y':	return Color.YELLOW;
+		case'W':	return Color.WHITE;
+		default:	return Color.BLACK;
+		}
 	}
 	public static Color GetColorRGB() {
 		return ColorRGB.get(CreateRGB());

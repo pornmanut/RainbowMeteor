@@ -27,7 +27,7 @@ public class WorldRenderer {
 	public void drawTotalMeteor(SpriteBatch batch) {
 		for(int i=0;i<world.getMeteorSystem().getMaxOfMeteor();i++) {
 			Meteor m = world.getMeteorSystem().getMeteor(i);
-			batch.draw(MeteorColor.getMeteorTexture(m.getColor()),
+			batch.draw(MeteorColor.GetMeteorTexture(m.getColor()),
 					m.getPosX()-m.getXOffset(),
 					getPosY(m.getPosY())-m.getYOffset());
 			

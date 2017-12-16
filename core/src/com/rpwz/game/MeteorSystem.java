@@ -4,14 +4,15 @@ package com.rpwz.game;
 import com.rpwz.game.MeteorColor.Color;
 public class MeteorSystem {
 	
-	private final int ROW_OF_METEOR = 3;
-	private final int COL_OF_METEOR = 8;
+
+	private final int ROW_OF_METEOR = 10;
+	private final int COL_OF_METEOR = 10;
 	private final int MAX_OF_METEOR = ROW_OF_METEOR*COL_OF_METEOR;
 	
-	private final int START_Y = -80;
-	private final int MARGIN_Y = 0;
+	private final int START_Y = 0;
+	private final int MARGIN_Y = 5;
 	
-	private final int MARGIN_EDGE = 80;
+	private final int MARGIN_EDGE = 50;
 	
 	private Meteor[] meteorSet = new Meteor[MAX_OF_METEOR];
 	
@@ -38,11 +39,21 @@ public class MeteorSystem {
 		if(index > MAX_OF_METEOR-1)return;
 		meteorSet[index].setMove(bool);
 	}
-	public void setMeteor(int row,int col,Color color,boolean bool) {
+	
+	public void setMeteor(int row,int col,Color color) {
 		if(row > ROW_OF_METEOR-1 || col > COL_OF_METEOR-1)return;
+		
 		int index = (row*COL_OF_METEOR)+col;
 		setMeteorColor(index, color);
-		setMeteorMove(index, bool);
+		setMeteorMove(index, true);
+	}
+	
+	public void setMeteor(int row,int col,Color color,boolean move) {
+		if(row > ROW_OF_METEOR-1 || col > COL_OF_METEOR-1)return;
+		
+		int index = (row*COL_OF_METEOR)+col;
+		setMeteorColor(index, color);
+		setMeteorMove(index, move);
 	}
 	
 	public int getRowOfMeteor() {
@@ -53,6 +64,10 @@ public class MeteorSystem {
 	}
 	public int getMaxOfMeteor() {
 		return MAX_OF_METEOR;
+	}
+	public Meteor getMeteor(int row,int col) {
+		int index = (row*COL_OF_METEOR)+col;
+		return meteorSet[index];
 	}
 	public Meteor getMeteor(int index) {
 		return meteorSet[index];

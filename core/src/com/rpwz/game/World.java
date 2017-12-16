@@ -6,32 +6,19 @@ public class World {
 
 
 	private WorldInput input;
-	private Color currentColor = MeteorColor.getColorRGB();
+	private Color currentColor = MeteorColor.GetColorRGB();
 	private float time=0;
 	private int score = 0;
 	private int hp=10;
 	private MeteorSystem ms;
-	private MeteorLevel level ;
-	private SpawnMeteorInfo[] miLevel01 = {new SpawnMeteorInfo(2, 1,Color.GREEN,2),new SpawnMeteorInfo(0, 7,Color.GREEN,4),
-			 								new SpawnMeteorInfo(1, 1,Color.BLUE,6),new SpawnMeteorInfo(1, 5, Color.RED,8),
-			 								new SpawnMeteorInfo(0, 5,Color.RED,10),new SpawnMeteorInfo(2,3,Color.BLUE,7),
-			 								new SpawnMeteorInfo(0,6,Color.BLUE,10), new SpawnMeteorInfo(0, 4,Color.RED,11),
-			 								new SpawnMeteorInfo(1, 3,Color.RED,12), new SpawnMeteorInfo(2, 5,Color.GREEN,11),
-			 								new SpawnMeteorInfo(2,7,Color.BLUE,11), new SpawnMeteorInfo(2,0,Color.GREEN,15),
-			 								new SpawnMeteorInfo(0,3,Color.BLUE,17), new SpawnMeteorInfo(0,0, Color.RED,17),
-			 								new SpawnMeteorInfo(2, 1, Color.BLUE,19), new SpawnMeteorInfo(2,0,Color.GREEN,20)};
-	
-
+	private MeteorLevel ml ;
 	
 	public World(WorldInput input) {
 
  		this.input = input;
- 		this.init();
+ 		this.ms = new MeteorSystem();
+ 		this.ml = new MeteorLevel(this.ms);
  
-	}
-	public void init() {
-		this.ms = new MeteorSystem();
-		this.level = new MeteorLevel(ms,miLevel01);
 	}
 	
 	public MeteorSystem getMeteorSystem() {
@@ -87,16 +74,19 @@ public class World {
 
 
 	public void updateColor(float delta) {
-		if(input.isKeyQ()) MeteorColor.setR(true);
-		if(input.isKeyW()) MeteorColor.setG(true);
-		if(input.isKeyE()) MeteorColor.setB(true);
-		if(input.isKeySpaceBar()) MeteorColor.clearColor();
+		boolean red = input.isKeyQ();
+		boolean green = input.isKeyW();
+		boolean blue = input.isKeyE();
 		
-		currentColor = MeteorColor.getColorRGB();
+		MeteorColor.setRGB(red,green,blue);
+		
+		currentColor = MeteorColor.GetColorRGB();
 	}
+	
 	public void updateTime(float delta) {
 		time += delta;
 	}
+	
 	public void updateMeteor(float delta) {
 		for(int i=0;i<ms.getMaxOfMeteor();i++) {
 			Meteor m = ms.getMeteor(i);
@@ -118,7 +108,7 @@ public class World {
 		updateColor(delta);
 		updateTime(delta);
 		updateMeteor(delta);
-		level.update(delta);
+		ml.update(delta);
 	}
 
 

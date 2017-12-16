@@ -19,10 +19,10 @@ public class MeteorColor {
 		CYAN,
 		WHITE;
 	}
-	private static String makeRGB() {
+	private static String CreateRGB() {
 		return RGB[0]+""+RGB[1]+""+RGB[2];
 	}
-	private static int getIntergerFromBoolean(boolean bool) {
+	private static int GetIntergerFromBoolean(boolean bool) {
 		return bool ? 1:0;
 	}
 	
@@ -45,33 +45,31 @@ public class MeteorColor {
 	static {
 		MeteorTexture = new HashMap<Color,Texture>();
 		
-		MeteorTexture.put(Color.RED,new Texture("redMeteor.png"));
-		MeteorTexture.put(Color.BLUE,new Texture("blueMeteor.png"));
-		MeteorTexture.put(Color.GREEN,new Texture("greenMeteor.png"));
-		MeteorTexture.put(Color.CYAN,new Texture("cyanMeteor.png"));
-		MeteorTexture.put(Color.YELLOW,new Texture("yellowMeteor.png"));
-		MeteorTexture.put(Color.MAGENTA,new Texture("magentaMeteor.png"));
-		MeteorTexture.put(Color.WHITE,new Texture("whiteMeteor.png"));
+		MeteorTexture.put(Color.RED,new Texture("images/redMeteor.png"));
+		MeteorTexture.put(Color.BLUE,new Texture("images/blueMeteor.png"));
+		MeteorTexture.put(Color.GREEN,new Texture("images/greenMeteor.png"));
+		MeteorTexture.put(Color.CYAN,new Texture("images/cyanMeteor.png"));
+		MeteorTexture.put(Color.YELLOW,new Texture("images/yellowMeteor.png"));
+		MeteorTexture.put(Color.MAGENTA,new Texture("images/magentaMeteor.png"));
+		MeteorTexture.put(Color.WHITE,new Texture("images/whiteMeteor.png"));
 	}
-	public static Color getColorRGB() {
-		return ColorRGB.get(makeRGB());
+	public static Color GetColorRGB() {
+		return ColorRGB.get(CreateRGB());
 	}
 	
-	public static Texture getMeteorTexture(Color key) {
+	public static Texture GetMeteorTexture(Color key) {
 		return MeteorTexture.get(key);
 	}
 	
-	public static void clearColor() {
+	public static void ResetColor() {
 		for(int i=0;i<3;i++)RGB[i] = 0;
 	}
-	public static void setR(boolean bool) {
-		RGB[0] = getIntergerFromBoolean(bool);
+	
+	public static void setRGB(boolean red,boolean green,boolean blue) {
+		RGB[0] = GetIntergerFromBoolean(red);
+		RGB[1] = GetIntergerFromBoolean(green);
+		RGB[2] = GetIntergerFromBoolean(blue);
 	}
-	public static void setG(boolean bool) {
-		RGB[1] = getIntergerFromBoolean(bool);
-	}
-	public static void setB(boolean bool) {
-		RGB[2] = getIntergerFromBoolean(bool);
-	}
+	
 	
 }

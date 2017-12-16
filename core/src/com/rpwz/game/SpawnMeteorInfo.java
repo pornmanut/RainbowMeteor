@@ -5,31 +5,29 @@ public class SpawnMeteorInfo {
 	private int row;
 	private int col;
 	private Color color;
-	private float timeStart;
+	private float[] setOfTimeStart;
+	private int index =0;
 	private float time;
 	private boolean spawn;
 	private boolean alreadySpawn = false;
 	
-	public SpawnMeteorInfo(int row,int col,Color color,float timeStart) {
-		setup(row,col, color, timeStart);
+	public SpawnMeteorInfo(int row,int col,Color color,float[] setOfTimeStart) {
+		setup(row, col, color);
+		this.setOfTimeStart = setOfTimeStart;
+		this.time = setOfTimeStart[0];
 	}
-	public void setup(int row,int col,Color color,float timeStart) {
+	public void setup(int row,int col,Color color) {
 		this.row = row;
 		this.col = col;
 		this.color = color;
-		this.timeStart = timeStart;
-		this.time = timeStart;
 		this.spawn = false;
 	}
-	
+
 	public void update(float delta) {
-		if(alreadySpawn) {
-			spawn = false;
-			return;
-		}
-		if(time <= 0) {
-			alreadySpawn = true;
+		if(time <= 0 && !alreadySpawn) {
 			spawn = true;
+	
+			alreadySpawn = true;
 			return;
 		}
 		time -= delta;
@@ -38,9 +36,8 @@ public class SpawnMeteorInfo {
 	public boolean getAlreadySpawn() {
 		return alreadySpawn;
 	}
-	public void reset() {
-		this.time = timeStart;
-		this.alreadySpawn = false;
+	public void setAlreadySpawn(boolean bool){
+		alreadySpawn = bool;
 	}
 	public int getRow() {
 		return row;
@@ -49,6 +46,9 @@ public class SpawnMeteorInfo {
 		return col;
 	}
 	
+	public void setSpawn(boolean bool) {
+		this.spawn = bool;
+	}
 	public boolean isSpawn() {
 		return spawn;
 	}
@@ -61,8 +61,6 @@ public class SpawnMeteorInfo {
 		return this.time;
 	}
 
-	public float getTimeStart() {
-		return this.timeStart;
-	}
+	
 
 }

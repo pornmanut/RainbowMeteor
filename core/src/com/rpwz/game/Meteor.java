@@ -6,17 +6,19 @@ import com.rpwz.game.MeteorColor.Color;
 public class Meteor {
 	
 	
-	
+	private int hp = 2;
+	private int startHp = hp;
 	private int x = 0;
 	private int y = 0;
 	private int startX = x;
 	private int stattY = y;
-	private int	xOffset = 24;
-	private int yOffset = 24;
+	private int	xOffset = 16;
+	private int yOffset = 16;
 	private int movementHoriznotal = 1;
 	private int movementSpeed = 3;
 	private Color color = Color.RED;
 	private boolean move = false;
+
 
 	
 	public Meteor() {
@@ -34,7 +36,6 @@ public class Meteor {
 	public boolean isColor(Color color) {
 		return (this.color == color);
 	}
-	
 	public boolean isCollide(int mouseX,int mouseY) {
 		if(	mouseX >= this.x-xOffset && 
 			mouseX <= this.x+xOffset &&
@@ -89,9 +90,19 @@ public class Meteor {
 		this.startX = x;
 		this.stattY = y;
 	}
+	public void reset() {
+		returnToStartPosition();
+		resetToStartHP();
+		setMove(false);
+		
+	}
 	public void returnToStartPosition() {
 		this.x = startX;
 		this.y = stattY;
+	}
+	
+	public void resetToStartHP() {
+		this.hp = startHp;
 	}
 	
 	public void setColor(Color color) {
@@ -118,6 +129,10 @@ public class Meteor {
 	public int getStartX() {
 		return startX;
 	}
+	public int getStartHP() {
+		return startHp;
+	}
+
 	public void setStartX(int startX) {
 		this.startX = startX;
 	}
@@ -126,6 +141,20 @@ public class Meteor {
 	}
 	public void setStattY(int stattY) {
 		this.stattY = stattY;
+	}
+	public void decreaseHP(int damage) {
+		if(this.hp > 0) this.hp -= damage;
+	}
+	public boolean getAlive() {
+		if(this.hp <= 0) {
+			return false;
+		}return true;
+	}
+	public int getHP() {
+		return hp;
+	}
+	public void setHP(int hp) {
+		this.hp = hp;
 	}
 	public boolean isMove() {
 		return move;

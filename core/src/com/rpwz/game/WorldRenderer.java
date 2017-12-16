@@ -48,7 +48,7 @@ public class WorldRenderer {
 		
 		for(int i=0;i<world.getMeteorSystem().getMaxOfMeteor();i++) {
 			Meteor m = world.getMeteorSystem().getMeteor(i);
-			font.draw(batch,"index: "+i+"\nx: "+m.getPosX()+"\ny: "+m.getPosY()+"\nc: "+m.getColor()+"\nm:"+m.isMove(),
+			font.draw(batch,"index: "+i+"\nx: "+m.getPosX()+"\ny: "+m.getPosY()+"\nc: "+m.getColor()+"\nm:"+m.getHP(),
 					m.getPosX()+5+m.getXOffset(),
 					getPosY(m.getPosY()));
 		}

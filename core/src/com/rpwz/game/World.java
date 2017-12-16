@@ -92,13 +92,14 @@ public class World {
 			Meteor m = ms.getMeteor(i);
 			m.update(delta);
 			if(m.isCollide(input.getX(), input.getY()) && input.isLeftPressed() && m.isColor(currentColor)) {
-				m.returnToStartPosition();
-				m.setMove(false);
-				addScore(10);
+				m.decreaseHP(1);
+				if(!m.getAlive()) {
+					m.reset();
+					addScore(10);
+				}
 			}
 			if(m.isOutOfEdge(RainbowMeteor.getHeight())) {
-				m.returnToStartPosition();
-				m.setMove(false);
+				m.reset();
 				removeHP(1);
 			}
 		}

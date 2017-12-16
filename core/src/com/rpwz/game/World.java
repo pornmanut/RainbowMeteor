@@ -17,7 +17,7 @@ public class World {
 
  		this.input = input;
  		this.ms = new MeteorSystem();
- 		this.ml = new MeteorLevel(ms,"level/001.txt");
+ 		this.ml = new MeteorLevel(ms,"level/test.txt");
  
 	}
 	

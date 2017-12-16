@@ -42,14 +42,13 @@ public class WorldRenderer {
 		font.draw(batch,"Q: "+input.isKeyQ(),400,getPosY(500));
 		font.draw(batch,"W: "+input.isKeyW(),400,getPosY(520));
 		font.draw(batch,"E: "+input.isKeyE(),400,getPosY(540));
-		font.draw(batch,"SpaceBar: "+input.isKeySpaceBar(),400,getPosY(560));
 		font.draw(batch,"Score: "+world.getScore(),500,getPosY(500));
 		font.draw(batch,"HP: "+world.getHP(),500,getPosY(520));
 		font.draw(batch,"Time: "+String.format("%.2f",world.getTime()),500,getPosY(540));
 		
 		for(int i=0;i<world.getMeteorSystem().getMaxOfMeteor();i++) {
 			Meteor m = world.getMeteorSystem().getMeteor(i);
-			font.draw(batch,"index: "+i+"\nx: "+m.getPosX()+"\ny: "+m.getPosY()+"\nc: "+m.getColor(),
+			font.draw(batch,"index: "+i+"\nx: "+m.getPosX()+"\ny: "+m.getPosY()+"\nc: "+m.getColor()+"\nm:"+m.isMove(),
 					m.getPosX()+5+m.getXOffset(),
 					getPosY(m.getPosY()));
 		}

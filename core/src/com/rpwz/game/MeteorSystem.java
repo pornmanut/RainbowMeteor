@@ -5,12 +5,12 @@ import com.rpwz.game.MeteorColor.Color;
 public class MeteorSystem {
 	
 
-	private final int ROW_OF_METEOR = 10;
+	private final int ROW_OF_METEOR = 5;
 	private final int COL_OF_METEOR = 10;
 	private final int MAX_OF_METEOR = ROW_OF_METEOR*COL_OF_METEOR;
 	
-	private final int START_Y = 0;
-	private final int MARGIN_Y = 5;
+	private final int START_Y = -32;
+	private final int MARGIN_Y = 0;
 	
 	private final int MARGIN_EDGE = 50;
 	
@@ -30,32 +30,28 @@ public class MeteorSystem {
 			}
 		}
 	}
-	
-	public void setMeteorColor(int index,Color color) {
-		if(index > MAX_OF_METEOR-1)return;
-		meteorSet[index].setColor(color);
-	}
-	public void setMeteorMove(int index,boolean bool) {
-		if(index > MAX_OF_METEOR-1)return;
-		meteorSet[index].setMove(bool);
+
+	public int getIndex(int row,int col) {
+		return (row*COL_OF_METEOR)+col;
 	}
 	
-	public void setMeteor(int row,int col,Color color) {
-		if(row > ROW_OF_METEOR-1 || col > COL_OF_METEOR-1)return;
+	public boolean setMeteor(int col,Color color) {
+		if(col < 0 || col > COL_OF_METEOR-1)return false;
+		Meteor m = null;
 		
-		int index = (row*COL_OF_METEOR)+col;
-		setMeteorColor(index, color);
-		setMeteorMove(index, true);
+		for(int row=0;row<ROW_OF_METEOR-1;row++) {
+			
+			if(meteorSet[getIndex(row, col)].isMove() == false) {
+				m = meteorSet[getIndex(row, col)];
+				break;
+			}
+		}
+		if(m != null) {
+			m.setColor(color);
+			m.setMove(true);
+			return true;
+		}return false ;
 	}
-	
-	public void setMeteor(int row,int col,Color color,boolean move) {
-		if(row > ROW_OF_METEOR-1 || col > COL_OF_METEOR-1)return;
-		
-		int index = (row*COL_OF_METEOR)+col;
-		setMeteorColor(index, color);
-		setMeteorMove(index, move);
-	}
-	
 	public int getRowOfMeteor() {
 		return ROW_OF_METEOR;
 	}

@@ -39,7 +39,7 @@ public class MeteorLevel {
 		for(int col=0;col<levelInfo.get(row).length();col++) {
 			c = levelInfo.get(row).charAt(col);
 			if(c != '-'){
-				ms.setMeteor(row, col,MeteorColor.charToColor(c));
+				ms.setMeteor(col,MeteorColor.charToColor(c));
 			}continue;
 		}
 

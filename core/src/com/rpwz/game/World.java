@@ -103,7 +103,19 @@ public class World {
 		}
 		ml.update(delta);
 	}
-	
+	public void updateFragment(float delta) {
+		for(int i=0;i<ms.getMaxFragment();i++) {
+			MeteorFragment f = ms.getFragment(i);
+			f.update(delta);
+			
+			if(f.isMove()) {
+				if(f.isFallOutside(RainbowMeteor.getHeight())) {
+					f.returnToStartPosition();
+					f.setMove(false);
+				}
+			}
+		}
+	}
 	public void updateMeteor(float delta) {
 		for(int i=0;i<ms.getMaxOfMeteor();i++) {
 			
@@ -115,6 +127,7 @@ public class World {
 				
 				if(m.isCollide(input.getX(), input.getY()) && input.isClicked() && m.isColor(currentColor)) {
 					m.decreaseHP(1);
+					ms.setFragment(m);
 					if(!m.getAlive()) {
 						m.reset();
 						addScore(10);
@@ -147,6 +160,7 @@ public class World {
 		updateColor(delta);
 		updateTime(delta);
 		updateMeteor(delta);
+		updateFragment(delta);
 		updateLevel(delta);
 	}
 

@@ -40,6 +40,18 @@ public class MeteorColor {
 		ColorRGB.put("111",Color.WHITE);
 		
 	}
+	private static final Map<Color,Texture> FragmentTexture;
+	static {
+		FragmentTexture = new HashMap<Color,Texture>();
+		
+		FragmentTexture.put(Color.RED,new Texture("images/redFragment.png"));
+		FragmentTexture.put(Color.BLUE,new Texture("images/blueFragment.png"));
+		FragmentTexture.put(Color.GREEN,new Texture("images/greenFragment.png"));
+		FragmentTexture.put(Color.CYAN,new Texture("images/cyanFragment.png"));
+		FragmentTexture.put(Color.MAGENTA,new Texture("images/magentaFragment.png"));
+		FragmentTexture.put(Color.YELLOW,new Texture("images/yellowFragment.png"));
+		FragmentTexture.put(Color.WHITE,new Texture("images/whiteFragment.png"));
+	}
 	
 	private static final Map<Color,Texture> MeteorTexture;
 	static {
@@ -71,6 +83,9 @@ public class MeteorColor {
 	
 	public static Texture GetMeteorTexture(Color key) {
 		return MeteorTexture.get(key);
+	}
+	public static Texture GetFragmentTexture(Color key) {
+		return FragmentTexture.get(key);
 	}
 	
 	public static void ResetColor() {

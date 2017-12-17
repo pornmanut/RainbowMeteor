@@ -4,6 +4,7 @@ package com.rpwz.game;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.rpwz.game.MeteorColor.Color;
 
 
 
@@ -28,13 +29,16 @@ public class WorldRenderer {
 	public void drawTotalMeteor(SpriteBatch batch) {
 		for(int i=0;i<world.getMeteorSystem().getMaxOfMeteor();i++) {
 			Meteor m = world.getMeteorSystem().getMeteor(i);
-			batch.draw(MeteorColor.GetMeteorTexture(m.getColor()),
-					m.getPosX()-m.getXOffset(),
-					getPosY(m.getPosY())-m.getYOffset());
-			
-
+			batch.draw(MeteorColor.GetMeteorTexture(m.getColor()),m.getPosX()-m.getXOffset(),getPosY(m.getPosY())-m.getYOffset());
 		}
 	}
+	public void drawFragment(SpriteBatch batch) {
+		for(int i=0;i<world.getMeteorSystem().getMaxFragment();i++) {
+			MeteorFragment f = world.getMeteorSystem().getFragment(i);
+			batch.draw(MeteorColor.GetFragmentTexture(f.getColor()),f.getPosX()-f.getXOffset(),getPosY(f.getPosY())-f.getYOffset());
+		}
+	}
+	
 	
 	public void showDebug(SpriteBatch batch) {
 		font.draw(batch,"mouseX: "+input.getX(),100,getPosY(500));
@@ -58,6 +62,7 @@ public class WorldRenderer {
 	public void render(float delta) {
 		batch.begin();
 		drawTotalMeteor(batch);
+		drawFragment(batch);
 		showDebug(batch);
 		batch.end();
 		

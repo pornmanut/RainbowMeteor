@@ -1,7 +1,7 @@
 package com.rpwz.game;
 
 
-
+import java.util.Random;
 import com.rpwz.game.MeteorColor.Color;
 public class Meteor {
 	
@@ -21,20 +21,41 @@ public class Meteor {
 
 
 	
-	public Meteor() {
 
-	}
 	public Meteor(int x,int y) {
 		setPosition(x,y);
 		setStartPosition(x, y);
+		setRandomHoriznotal();
 	}
 	public Meteor(int x,int y,Color color) {
 		setPosition(x, y);
 		setStartPosition(x, y);
 		this.color = color;
+		setRandomHoriznotal();
 	}
+	public void setSignHoriznotal() {
+		movementHoriznotal *= -1;
+	}
+	public void setRandomHoriznotal() {
+		movementHoriznotal = randomHoriznotal();
+	}
+	public int randomHoriznotal() {
+		Random rand = new Random();
+		return rand.nextInt(3)-1;
+	}
+	
 	public boolean isColor(Color color) {
 		return (this.color == color);
+	}
+	public boolean isCollideToAnother(Meteor other) {
+		if(	other.x+xOffset >= this.x-xOffset && 
+			other.x-xOffset <= this.x+xOffset &&
+			other.y+yOffset >= this.y-yOffset &&
+			other.y-yOffset <= this.y+yOffset)
+			{
+				return true;
+			}
+		return false;
 	}
 	public boolean isCollide(int mouseX,int mouseY) {
 		if(	mouseX >= this.x-xOffset && 
@@ -75,7 +96,7 @@ public class Meteor {
 		if(this.move) {
 			falling();
 			if(isOutOfSide()) {
-				setHorizontal(getHorizontal()*-1);
+				setSignHoriznotal();
 			}
 			horizontal();
 		}

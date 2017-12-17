@@ -106,18 +106,39 @@ public class World {
 	
 	public void updateMeteor(float delta) {
 		for(int i=0;i<ms.getMaxOfMeteor();i++) {
+			
 			Meteor m = ms.getMeteor(i);
+			
 			m.update(delta);
-			if(m.isCollide(input.getX(), input.getY()) && input.isClicked() && m.isColor(currentColor)) {
-				m.decreaseHP(1);
-				if(!m.getAlive()) {
-					m.reset();
-					addScore(10);
+			
+			if(m.isMove()) {
+				
+				if(m.isCollide(input.getX(), input.getY()) && input.isClicked() && m.isColor(currentColor)) {
+					m.decreaseHP(1);
+					if(!m.getAlive()) {
+						m.reset();
+						addScore(10);
+					}
 				}
-			}
-			if(m.isOutOfEdge(RainbowMeteor.getHeight())) {
-				m.reset();
-				removeHP(1);
+				
+				if(m.isOutOfEdge(RainbowMeteor.getHeight())) {
+					m.reset();
+					removeHP(1);
+				}
+				
+				for(int j=0;j < ms.getMaxOfMeteor();j++) {
+					if(i == j) continue; //self
+					
+					Meteor other = ms.getMeteor(j);
+					if(!other.isMove())continue; //skip not move
+					
+					
+					if(m.isCollideToAnother(other)) {
+						int temp = m.getHorizontal();
+						m.setHorizontal(other.getHorizontal());
+						other.setHorizontal(temp);
+					}
+				}
 			}
 		}
 	}

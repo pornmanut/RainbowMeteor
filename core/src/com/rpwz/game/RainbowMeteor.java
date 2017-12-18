@@ -9,7 +9,8 @@ public class RainbowMeteor extends Game {
 	
 	public SpriteBatch batch;
 	public BitmapFont font;
-	
+	public MenuScreen menu;
+	public GameScreen game; 
 	private static final int HEIGHT = 600;
 	private static final int WIDTH = 800;
 	
@@ -17,7 +18,10 @@ public class RainbowMeteor extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		setScreen(new GameScreen(this));
+		menu = new MenuScreen(this);
+		game = new GameScreen(this);
+		setScreen(menu);
+		//setScreen(new GameScreen(this));
 	}
 
 	@Override

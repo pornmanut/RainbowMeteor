@@ -4,7 +4,7 @@ import com.rpwz.game.MeteorColor.Color;
 public class World {
 	
 	private static final int MAX_DELAY_LEVEL_TIME = 4;
-	
+	//
 	private WorldInput input;
 	private Color currentColor = MeteorColor.GetColorRGB();
 	private float time=0;

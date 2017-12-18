@@ -3,7 +3,7 @@ package com.rpwz.game;
 import com.rpwz.game.MeteorColor.Color;
 public class World {
 	
-	private static final int MAX_DELAY_LEVEL_TIME = 2;
+	private static final int MAX_DELAY_LEVEL_TIME = 4;
 	
 	private WorldInput input;
 	private Color currentColor = MeteorColor.GetColorRGB();
@@ -14,12 +14,14 @@ public class World {
 
 	private MeteorSystem ms;
 	private MeteorLevel ml ;
+	private boolean end = false;
+	private boolean run = true;
 	
 	public World(WorldInput input) {
 
  		this.input = input;
  		this.ms = new MeteorSystem();
- 		this.ml = new MeteorLevel(ms,0);
+ 		this.ml = new MeteorLevel(ms,1);
  
 	}
 	
@@ -27,7 +29,9 @@ public class World {
 		return this.ms;
 	}
 	
-
+	public boolean isRun() {
+		return run;
+	}
 	public int getHP() {
 		return hp;
 	}
@@ -95,11 +99,20 @@ public class World {
 		if(ml.isFinishLevel()) {
 			if(delayLevelTime <  MAX_DELAY_LEVEL_TIME) {
 				delayLevelTime += delta;
+				System.out.println("delta");
 				return ;
 			}
 			
-			if(!ml.isLastLevel() ) ml.changeLevelTo(ml.getLevel()+1);
-			delayLevelTime = 0;
+			if(!ml.isLastLevel() ) {
+				ml.changeLevelTo(ml.getLevel()+1);
+				System.out.println("a");
+				delayLevelTime = 0;
+			}else {
+				System.out.println("s");
+				end = true;
+			}
+				
+			
 		}
 		ml.update(delta);
 	}
@@ -115,6 +128,13 @@ public class World {
 				}
 			}
 		}
+	}
+	public void updateHp(float delta) {
+		if(hp <= 0 || end) {
+			this.run = false;
+			return;
+		}
+		this.run = true;
 	}
 	public void updateMeteor(float delta) {
 		for(int i=0;i<ms.getMaxOfMeteor();i++) {
@@ -162,6 +182,7 @@ public class World {
 		updateMeteor(delta);
 		updateFragment(delta);
 		updateLevel(delta);
+		updateHp(delta);
 	}
 
 

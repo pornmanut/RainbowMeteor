@@ -10,6 +10,7 @@ public class GameScreen extends ScreenAdapter{
 		private World world;
 		private WorldRenderer worldRenderer;
 		private WorldInput input;
+		
 
 		public GameScreen(RainbowMeteor base) {
 			input = new WorldInput();
@@ -26,17 +27,22 @@ public class GameScreen extends ScreenAdapter{
 			input.setPos(Gdx.input.getX(),Gdx.input.getY());
 			input.setLeftPressed(Gdx.input.isButtonPressed(Input.Buttons.LEFT));
 		}
-		
+		private boolean isUpdate() {
+			return world.isRun();
+		}
 		private void clear() {
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
 		}
 		
 		private void update(float delta) {
-			updateMouse(world);
-			updateKeys(world);
-			world.update(delta);
+			if(isUpdate()) {
+				updateMouse(world);
+				updateKeys(world);
+				world.update(delta);
+			}	
 		}
+			
 		
 		@Override
 		public void render(float delta) {

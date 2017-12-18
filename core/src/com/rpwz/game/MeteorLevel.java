@@ -9,14 +9,22 @@ import java.util.Map;
 
 public class MeteorLevel {
 	
-	private static final int MAX_LEVEL = 2;
+	private static int lastLevel = 0;
 	private static final Map<String,List<String>> LevelInformation;
 	static {
-		LevelInformation = new HashMap<String,List<String>>();
-		LevelInformation.put("0", MeteorFile.readListOfString("level/test.txt"));
-		LevelInformation.put("1", MeteorFile.readListOfString("level/001.txt"));
-		LevelInformation.put("2", MeteorFile.readListOfString("level/002.txt"));
-		
+		LevelInformation = new HashMap<String, List<String>>();
+		List<String> lines = MeteorFile.readListOfString("level/levelInfo.txt");
+		String line; String[] strSplit;
+		for(int i=0;i<lines.size();i++) {
+			line = lines.get(i);
+			strSplit = line.split(":");
+			if(strSplit[0] != null && strSplit[1] != null) {
+				LevelInformation.put(strSplit[0],MeteorFile.readListOfString("level/"+strSplit[1]));
+				lastLevel++;
+				//System.out.println("key"+LevelInformation.get(strSplit[0]));
+				
+			}
+		}
 	}
 	public static List<String> getLevelInfomation(int key){
 		return LevelInformation.get(Integer.toString(key));
@@ -43,7 +51,7 @@ public class MeteorLevel {
 		changeLevelTo(level);
 	}
 	public void changeLevelTo(int level) {
-		if(!(level < 0 || level > MAX_LEVEL)) {
+		if(!(level < 0 || level > lastLevel)) {
 			this.time = 0; 
 			this.index = 0;
 			this.level = level;
@@ -81,7 +89,7 @@ public class MeteorLevel {
 		time += delta;
 	}
 	public boolean isLastLevel() {
-		return (level == MAX_LEVEL);
+		return (level == lastLevel);
 	}
 	public int getLevel() {
 		return level;

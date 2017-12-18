@@ -57,6 +57,7 @@ public class MeteorColor {
 	static {
 		MeteorTexture = new HashMap<Color,Texture>();
 		
+		MeteorTexture.put(Color.BLACK,new Texture("images/blackMeteor.png"));
 		MeteorTexture.put(Color.RED,new Texture("images/redMeteor.png"));
 		MeteorTexture.put(Color.BLUE,new Texture("images/blueMeteor.png"));
 		MeteorTexture.put(Color.GREEN,new Texture("images/greenMeteor.png"));

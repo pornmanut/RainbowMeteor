@@ -99,16 +99,14 @@ public class World {
 		if(ml.isFinishLevel()) {
 			if(delayLevelTime <  MAX_DELAY_LEVEL_TIME) {
 				delayLevelTime += delta;
-				System.out.println("delta");
 				return ;
 			}
 			
 			if(!ml.isLastLevel() ) {
 				ml.changeLevelTo(ml.getLevel()+1);
-				System.out.println("a");
+				addScore(100);
 				delayLevelTime = 0;
 			}else {
-				System.out.println("s");
 				end = true;
 			}
 				

@@ -10,7 +10,8 @@ public class GameScreen extends ScreenAdapter{
 		private World world;
 		private WorldRenderer worldRenderer;
 		private WorldInput input;
-		
+		private boolean pause = false;
+		private float delayPause = 0;
 
 		public GameScreen(RainbowMeteor base) {
 			input = new WorldInput();
@@ -27,8 +28,18 @@ public class GameScreen extends ScreenAdapter{
 			input.setPos(Gdx.input.getX(),Gdx.input.getY());
 			input.setLeftPressed(Gdx.input.isButtonPressed(Input.Buttons.LEFT));
 		}
-		private boolean isUpdate() {
+		private boolean isRun() {
 			return world.isRun();
+		}
+		public boolean isPause() {
+			return pause;
+		}
+		public void keyPause(float delta) {
+			if(delayPause <= 0 && Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+				pause = !pause;
+				delayPause = 0.5f;
+			}
+			if(delayPause > 0)delayPause -= delta;
 		}
 		private void clear() {
 			Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -36,10 +47,14 @@ public class GameScreen extends ScreenAdapter{
 		}
 		
 		private void update(float delta) {
-			if(isUpdate()) {
-				updateMouse(world);
-				updateKeys(world);
-				world.update(delta);
+			if(isRun()) {
+				keyPause(delta);
+				if(!isPause()) {
+					updateMouse(world);
+					updateKeys(world);
+					world.update(delta);
+				}
+				
 			}	
 		}
 			
